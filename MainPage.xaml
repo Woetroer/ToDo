@@ -4,7 +4,6 @@
              x:Class="Todo.MainPage"
              xmlns:viewmodel="clr-namespace:ToDo.Viewmodel"
              xmlns:effectsView="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
-             x:DataType="viewmodel:MainViewModel"
              Title="Tasks">
 
     <!--TODO: DeleteTaskCommand-->
@@ -25,8 +24,8 @@
                     </LinearGradientBrush>
                 </Border.Stroke>
                 <HorizontalStackLayout>
-                    <Entry TextColor="White" Text="{Binding Text}" Placeholder="Task Name" HeightRequest="50" WidthRequest="280" Margin="8, 0, 5, 0"></Entry>
-                    <Button Text="Add" TextColor="Black" HeightRequest="50" WidthRequest="58" Command="{Binding AddTaskCommand}"></Button>
+                    <Entry x:Name="addTaskEntry" TextColor="White" Text="{Binding Text}" Placeholder="Task Name" HeightRequest="50" WidthRequest="280" Margin="8, 0, 5, 0"></Entry>
+                    <Button x:Name="addTaskButton" Text="Add" TextColor="Black" HeightRequest="50" WidthRequest="58" Command="{Binding AddTaskCommand}" Clicked="addTaskButton_Clicked"></Button>
                 </HorizontalStackLayout>
             </Border>
 

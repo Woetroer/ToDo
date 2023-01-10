@@ -20,9 +20,10 @@ public partial class MainViewModel : ObservableObject
     [RelayCommand]
     void AddTask()
     {
-        if (text != null && !tasks.Contains(text))
+        if (text != string.Empty && !tasks.Contains(text))
         {
             Tasks.Add(text);
+            text = string.Empty;
         }
     }
 

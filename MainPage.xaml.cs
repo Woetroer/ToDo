@@ -9,5 +9,10 @@ public partial class MainPage : ContentPage
 		InitializeComponent();
 		BindingContext = vm;
 	}
+
+	private void addTaskButton_Clicked(object sender, EventArgs e)
+	{
+		addTaskEntry.Text = string.Empty;
+	}
 }
 
