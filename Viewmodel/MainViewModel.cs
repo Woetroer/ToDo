@@ -18,7 +18,13 @@ public partial class MainViewModel : ObservableObject
     string text;
 
     [RelayCommand]
-    void AddTask() => Tasks.Add(text);
+    void AddTask()
+    {
+        if (text != null && !tasks.Contains(text))
+        {
+            Tasks.Add(text);
+        }
+    }
 
     [RelayCommand]
     void DeleteTask(string taskName)

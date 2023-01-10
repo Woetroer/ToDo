@@ -7,6 +7,12 @@
              x:DataType="viewmodel:MainViewModel"
              Title="Tasks">
 
+    <!--TODO: DeleteTaskCommand-->
+    
+    <ContentPage.BindingContext>
+        <viewmodel:MainViewModel />
+    </ContentPage.BindingContext>
+
     <ScrollView>
         <VerticalStackLayout Margin="20, 22">
             <Border>
@@ -31,7 +37,7 @@
                             <SwipeView.RightItems>
                                 <SwipeItem
                                     IconImageSource="checkmark.png"
-                                    Command="{Binding DeleteTaskCommand}"
+                                    Command="{Binding BindingContext.DeleteTaskCommand, Source={x:Reference MainPage}}"
                                     CommandParameter="{Binding .}"/>
                             </SwipeView.RightItems>
                             <Grid HeightRequest="45" BackgroundColor="White" Margin="0, 8, 0, 0">
