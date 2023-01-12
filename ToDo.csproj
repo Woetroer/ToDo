@@ -32,10 +32,10 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" Color="#ffffff"/>
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" Color="#ffffff" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#000000" Resize="false"/>
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#000000" Resize="false" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -50,12 +50,14 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.2" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.2" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.2">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="Syncfusion.Maui.Core" Version="20.4.42" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="NewFolder\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -63,5 +65,15 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
+
+	<Target Name="RemoveCollidingDepsJson" AfterTargets="GetPackagingOutputs" BeforeTargets="_ComputeAppxPackagePayload">
+		<!-- If conflicting build and publish deps.json files are present, use only the publish deps.json, 
+            and remove the corresponding build deps.json. -->
+		<ItemGroup Condition="'@(PackagingOutputs)'!=''">
+			<_PublishDepsJson Include="@(PackagingOutputs-&gt;WithMetadataValue('OutputGroup', 'PublishItemsOutputGroupOutput'))" Condition="$([System.String]::Copy('%(FileName)%(Extension)').EndsWith('.deps.json'))" />
+			<_BuildDepsJson Include="@(PackagingOutputs-&gt;WithMetadataValue('OutputGroup', 'GetCopyToOutputDirectoryItemsOutputGroup'))" Condition="$([System.String]::Copy('%(FileName)%(Extension)').EndsWith('.deps.json'))" />
+			<PackagingOutputs Condition="'@(_PublishDepsJson)'!='' and '@(_BuildDepsJson)'!=''" Remove="@(_BuildDepsJson)" />
+		</ItemGroup>
+	</Target>
 
 </Project>

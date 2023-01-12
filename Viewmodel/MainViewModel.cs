@@ -1,18 +1,26 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using Todo.Data;
+using Todo.Services;
+using Task = Todo.Models.Task;
 
 namespace ToDo.Viewmodel;
 
 public partial class MainViewModel : ObservableObject
 {
+    readonly TaskService taskService = new();
+    private readonly TaskContext db = new();
     public MainViewModel()
     {
-        Tasks = new ObservableCollection<string>();
+        TaskService.OnTasksChanged += RefreshLibrary;
+        RefreshLibrary();
     }
 
+    public void RefreshLibrary(List<Task> books = null) => Tasks = new ObservableCollection<Task>(db.Tasks);
+
     [ObservableProperty]
-    ObservableCollection<string> tasks;
+    ObservableCollection<Task> tasks;
 
     [ObservableProperty]
     string text;
@@ -20,16 +28,13 @@ public partial class MainViewModel : ObservableObject
     [RelayCommand]
     void AddTask()
     {
-        if (text != string.Empty && !tasks.Contains(text))
+        if (!string.IsNullOrWhiteSpace(text)) // if doesnt contain
         {
-            Tasks.Add(text);
+            taskService.Add(new Task { Title = text });
             text = string.Empty;
         }
     }
 
     [RelayCommand]
-    void DeleteTask(string taskName)
-    {
-        if (Tasks.Contains(taskName)) Tasks.Remove(taskName);
-    }
+    void DeleteTask(int id) => taskService.Delete(id);
 }
