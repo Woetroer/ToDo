@@ -28,7 +28,7 @@ public partial class MainViewModel : ObservableObject
     [RelayCommand]
     void AddTask()
     {
-        if (!string.IsNullOrWhiteSpace(text)) // if doesnt contain
+        if (!string.IsNullOrWhiteSpace(text) && !taskService.IsDuplicate(new Task { Title = Text }))
         {
             taskService.Add(new Task { Title = text });
             text = string.Empty;
@@ -36,5 +36,5 @@ public partial class MainViewModel : ObservableObject
     }
 
     [RelayCommand]
-    void DeleteTask(int id) => taskService.Delete(id);
+    public void DeleteTask(int id) => taskService.Delete(id);
 }

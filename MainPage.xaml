@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:Todo.Models"
              x:Class="Todo.MainPage"
              xmlns:viewmodel="clr-namespace:ToDo.Viewmodel"
              xmlns:effectsView="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
-             Title="Tasks">
+             Title="Taken">
 
     <!--TODO: DeleteTaskCommand-->
     
@@ -12,41 +13,42 @@
         <viewmodel:MainViewModel />
     </ContentPage.BindingContext>
 
-    <ScrollView>
-        <VerticalStackLayout Margin="20, 22">
-            <Border>
-                <Border.Stroke>
-                    <LinearGradientBrush EndPoint="0,1">
-                        <GradientStop Color="White"
+    <Grid x:Name="TaskPage">
+        <ScrollView>
+            <VerticalStackLayout Margin="20, 22">
+                <Border>
+                    <Border.Stroke>
+                        <LinearGradientBrush EndPoint="0,1">
+                            <GradientStop Color="White"
                           Offset="0.1" />
-                        <GradientStop Color="{StaticResource Gray950}"
+                            <GradientStop Color="{StaticResource Gray950}"
                           Offset="1.0" />
-                    </LinearGradientBrush>
-                </Border.Stroke>
-                <HorizontalStackLayout>
-                    <Entry x:Name="addTaskEntry" TextColor="White" Text="{Binding Text}" Placeholder="Task Name" HeightRequest="50" WidthRequest="280" Margin="8, 0, 5, 0"></Entry>
-                    <Button x:Name="addTaskButton" Text="Add" TextColor="Black" HeightRequest="50" WidthRequest="58" Command="{Binding AddTaskCommand}" Clicked="addTaskButton_Clicked"></Button>
-                </HorizontalStackLayout>
-            </Border>
+                        </LinearGradientBrush>
+                    </Border.Stroke>
+                    <HorizontalStackLayout>
+                        <Entry x:Name="addTaskEntry" TextColor="White" Text="{Binding Text}" Placeholder="Taak omschrijving" HeightRequest="50" WidthRequest="280" Margin="8, 0, 5, 0"></Entry>
+                        <Button x:Name="addTaskButton" Text="+" FontSize="20" TextColor="Black" HeightRequest="50" WidthRequest="58" Command="{Binding AddTaskCommand}" Clicked="addTaskButton_Clicked"></Button>
+                    </HorizontalStackLayout>
+                </Border>
 
-            <CollectionView ItemsSource="{Binding Tasks}" Margin="0, 18, 0, 0">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <SwipeView>
-                            <SwipeView.RightItems>
-                                <SwipeItem
+                <CollectionView ItemsSource="{Binding Tasks}" Margin="0, 18, 0, 0">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <SwipeView>
+                                <SwipeView.RightItems>
+                                    <SwipeItem
                                     IconImageSource="checkmark.png"
-                                    Command="{Binding BindingContext.DeleteTaskCommand, Source={x:Reference MainPage}}"
+                                    Command="{Binding BindingContext.DeleteTaskCommand, Source={x:Reference TaskPage}}"
                                     CommandParameter="{Binding Id}"/>
-                            </SwipeView.RightItems>
-                            <Grid HeightRequest="45" BackgroundColor="White" Margin="0, 8, 0, 0">
-                                <Label FontSize="18" TextColor="Black" Text="{Binding Title}" FontAttributes="Bold" Margin="28, 10, 0, 0"/>
-                            </Grid>
-                        </SwipeView>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </VerticalStackLayout>
-    </ScrollView>
-
+                                </SwipeView.RightItems>
+                                <Grid  HeightRequest="45" BackgroundColor="White" Margin="0, 8, 0, 0">
+                                    <Label FontSize="18" TextColor="Black" Text="{Binding Title}" FontAttributes="Bold" Margin="28, 10, 0, 0"/>
+                                </Grid>
+                            </SwipeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

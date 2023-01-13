@@ -21,5 +21,12 @@ namespace Todo.Services
             db.SaveChanges();
             OnTasksChanged?.Invoke(db.Tasks.ToList());
         }
+
+        public bool IsDuplicate(Task taskToAdd)
+        {
+            var duplicates = db.Tasks.Where(task => task.Title == taskToAdd.Title);
+            if (duplicates.Count() > 0) return true;
+            return false;
+        }
     }
 }

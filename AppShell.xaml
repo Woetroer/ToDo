@@ -12,7 +12,7 @@
             <ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>
         </Tab>
     </FlyoutItem>
-    <FlyoutItem Title="History" Icon="History.png">
+    <FlyoutItem Title="Historie" Icon="History.png">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate local:History}"/>
         </Tab>
