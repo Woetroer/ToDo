@@ -10,14 +10,18 @@ namespace ToDo.Viewmodel;
 public partial class MainViewModel : ObservableObject
 {
     readonly TaskService taskService = new();
-    private readonly TaskContext db = new();
+
     public MainViewModel()
     {
         TaskService.OnTasksChanged += RefreshLibrary;
         RefreshLibrary();
     }
 
-    public void RefreshLibrary(List<Task> tasks = null) => Tasks = new ObservableCollection<Task>(db.Tasks.Where(task => !task.IsCompleted));
+    public void RefreshLibrary(List<Task> tasks = null)
+    {
+        using var db = new TaskContext();
+        Tasks = new ObservableCollection<Task>(db.Tasks.Where(task => task.IsCompleted == false));
+    }
 
     [ObservableProperty]
     ObservableCollection<Task> tasks;
