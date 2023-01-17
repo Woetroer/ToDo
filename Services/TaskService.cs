@@ -15,9 +15,16 @@ namespace Todo.Services
             OnTasksChanged?.Invoke(db.Tasks.ToList());
         }
 
-        public void Delete(int id)
+        public void Delete(Task task)
         {
-            db.Tasks.Remove(db.Tasks.Single(task => task.Id == id));
+            db.Tasks.Remove(task);
+            db.SaveChanges();
+            OnTasksChanged?.Invoke(db.Tasks.ToList());
+        }
+
+        public void Complete(Task task)
+        {
+            task.IsCompleted = true;
             db.SaveChanges();
             OnTasksChanged?.Invoke(db.Tasks.ToList());
         }

@@ -17,7 +17,7 @@ public partial class MainViewModel : ObservableObject
         RefreshLibrary();
     }
 
-    public void RefreshLibrary(List<Task> books = null) => Tasks = new ObservableCollection<Task>(db.Tasks);
+    public void RefreshLibrary(List<Task> tasks = null) => Tasks = new ObservableCollection<Task>(db.Tasks.Where(task => !task.IsCompleted));
 
     [ObservableProperty]
     ObservableCollection<Task> tasks;
@@ -36,5 +36,5 @@ public partial class MainViewModel : ObservableObject
     }
 
     [RelayCommand]
-    public void DeleteTask(int id) => taskService.Delete(id);
+    public void CompleteTask(Task task) => taskService.Complete(task);
 }

@@ -8,6 +8,7 @@ namespace Todo.Data
     {
         public DbSet<Task> Tasks { get; set; }
         public string DbPath { get; }
+
         public TaskContext()
         {
             var folder = Environment.SpecialFolder.LocalApplicationData;

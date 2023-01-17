@@ -38,8 +38,8 @@
                                 <SwipeView.RightItems>
                                     <SwipeItem
                                     IconImageSource="checkmark.png"
-                                    Command="{Binding BindingContext.DeleteTaskCommand, Source={x:Reference TaskPage}}"
-                                    CommandParameter="{Binding Id}"/>
+                                    Command="{Binding BindingContext.CompleteTaskCommand, Source={x:Reference TaskPage}}"
+                                    CommandParameter="{Binding .}"/>
                                 </SwipeView.RightItems>
                                 <Grid  HeightRequest="45" BackgroundColor="White" Margin="0, 8, 0, 0">
                                     <Label FontSize="18" TextColor="Black" Text="{Binding Title}" FontAttributes="Bold" Margin="28, 10, 0, 0"/>
