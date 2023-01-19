@@ -3,10 +3,17 @@
     x:Class="Todo.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:Todo"
-    Shell.FlyoutBehavior="Flyout">
+    xmlns:local="clr-namespace:Todo">
+    <TabBar>
+        <Tab Title="Home" Icon="home.png">
+            <ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>
+        </Tab>
+        <Tab Title="Historie" Icon="history.png">
+            <ShellContent ContentTemplate="{DataTemplate local:History}"/>
+        </Tab>
+    </TabBar>
 
-    <FlyoutItem Title="Home" Icon="home.png">
+    <!--<FlyoutItem Title="Home" Icon="home.png">
 
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>
@@ -16,5 +23,5 @@
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate local:History}"/>
         </Tab>
-    </FlyoutItem>
+    </FlyoutItem>-->
 </Shell>

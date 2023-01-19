@@ -1,12 +1,40 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:Todo.Models"
              x:Class="Todo.History"
+             xmlns:viewmodel="clr-namespace:Todo.Viewmodel"
              Title="Historie">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+    <ContentPage.BindingContext>
+        <viewmodel:HistoryViewModel />
+    </ContentPage.BindingContext>
+
+    <Grid x:Name="HistoryPage">
+        <ScrollView>
+            <VerticalStackLayout Margin="20, 22">
+                <Button Text="Verwijder Historie" FontSize="16" FontFamily="Bold" TextColor="Black" CornerRadius="7" Command="{Binding DeleteHistoryCommand}"></Button>
+                <CollectionView ItemsSource="{Binding Tasks}" Margin="0, 18, 0, 0">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <SwipeView>
+                                <SwipeView.RightItems>
+                                    <SwipeItem
+                                    IconImageSource="bin.png"
+                                    Command="{Binding BindingContext.DeleteTaskCommand, Source={x:Reference HistoryPage}}"
+                                    CommandParameter="{Binding .}"/>
+                                </SwipeView.RightItems>
+                                <Grid HeightRequest="45" BackgroundColor="{StaticResource Gray900}" Margin="0, 8, 0, 0">
+                                    <HorizontalStackLayout>
+                                        <Label FontSize="18" TextColor="White" Text="{Binding Title}" FontAttributes="Bold" Margin="28, 10, 0, 0"/>
+                                        <Label FontSize="18" TextColor="White" Text="{Binding DateCreated}" FontAttributes="Bold" Margin="5, 10, 0, 0"/>
+                                    </HorizontalStackLayout>
+                                </Grid>
+                            </SwipeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>
