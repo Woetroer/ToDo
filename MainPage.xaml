@@ -5,29 +5,21 @@
              xmlns:models="clr-namespace:Todo.Models"
              x:Class="Todo.MainPage"
              xmlns:viewmodel="clr-namespace:ToDo.Viewmodel"
-             xmlns:effectsView="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
-             Title=" Taken">
+             Title=" Tasks">
 
-    <!--TODO: DeleteTaskCommand-->
-    
     <ContentPage.BindingContext>
         <viewmodel:MainViewModel />
     </ContentPage.BindingContext>
 
     <Grid x:Name="TaskPage">
         <ScrollView>
-            <VerticalStackLayout Margin="20, 22">
-                <Border>
+            <VerticalStackLayout Margin="20, 30, 20, 40">
+                <Border StrokeShape="{RoundRectangle CornerRadius=7}" Margin="0, 0, 0, 35">
                     <Border.Stroke>
-                        <LinearGradientBrush EndPoint="0,1">
-                            <GradientStop Color="White"
-                          Offset="0.1" />
-                            <GradientStop Color="{StaticResource Gray950}"
-                          Offset="1.0" />
-                        </LinearGradientBrush>
+                        <SolidColorBrush Color="White"></SolidColorBrush>
                     </Border.Stroke>
                     <HorizontalStackLayout>
-                        <Entry x:Name="addTaskEntry" TextColor="White" Text="{Binding Text}" Placeholder="Taak omschrijving" HeightRequest="50" WidthRequest="280" Margin="8, 0, 5, 0"></Entry>
+                        <Entry x:Name="addTaskEntry" TextColor="White" Text="{Binding Text}" FontSize="15" VerticalTextAlignment="Start" HeightRequest="50" WidthRequest="280" Margin="8, 0, 5, -15" MaxLength="22"></Entry>
                         <Button x:Name="addTaskButton" Text="+" FontSize="20" TextColor="Black" HeightRequest="50" WidthRequest="58" Command="{Binding AddTaskCommand}" Clicked="addTaskButton_Clicked"></Button>
                     </HorizontalStackLayout>
                 </Border>
@@ -42,28 +34,45 @@
                             IsVisible="false"
                             IsAnimationEnabled="false">
                 </skia:SKLottieView>
-                <CollectionView ItemsSource="{Binding Tasks}" Margin="0, 18, 0, 0">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <SwipeView>
-                                <SwipeView.RightItems>
-                                    <SwipeItem
-                                    x:Name="deleteTaskButton"
-                                    IconImageSource="checkmark.png"
-                                    Command="{Binding BindingContext.CompleteTaskCommand, Source={x:Reference TaskPage}}"
-                                    CommandParameter="{Binding .}"
-                                    Clicked="deleteTaskButton_Clicked"/>
-                                </SwipeView.RightItems>
-                                <Grid HeightRequest="45" BackgroundColor="{StaticResource Gray100}" Margin="0, 9, 0, 0">
-                                    <HorizontalStackLayout>
-                                        <Label Text="■" FontSize="18" Margin="10, 9, 0, 0" TextColor="Black"></Label>
-                                        <Label FontSize="17" TextColor="Black" Text="{Binding Title}" FontAttributes="Bold" Margin="18, 11, 0, 0"/>
-                                    </HorizontalStackLayout>
-                                </Grid>
-                            </SwipeView>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Border StrokeShape="{RoundRectangle CornerRadius=7}" StrokeThickness="0" Grid.Row="0">
+                        <CollectionView ItemsSource="{Binding Tasks}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <SwipeView>
+                                        <SwipeView.LeftItems>
+                                            <SwipeItem
+                                        x:Name="deleteTaskButton"
+                                        IconImageSource="bin.png"
+                                        Command="{Binding BindingContext.DeleteTaskCommand, Source={x:Reference TaskPage}}"
+                                        CommandParameter="{Binding .}" />
+                                        </SwipeView.LeftItems>
+                                        <SwipeView.RightItems>
+                                            <SwipeItem
+                                        x:Name="completeTaskButton"
+                                        IconImageSource="checkmark.png"
+                                        Command="{Binding BindingContext.CompleteTaskCommand, Source={x:Reference TaskPage}}"
+                                        CommandParameter="{Binding .}" />
+                                        </SwipeView.RightItems>
+                                        <Grid HeightRequest="45" BackgroundColor="white">
+                                            <HorizontalStackLayout>
+                                                <Label Text="■" FontSize="18" Margin="10, 9, 0, 0" TextColor="Black"></Label>
+                                                <ContentView BackgroundColor="{StaticResource Gray400}" Padding="0, 0, 0, 1" WidthRequest="10000">
+                                                    <ContentView BackgroundColor="white">
+                                                        <Label FontSize="17" TextColor="Black" Text="{Binding Title}" FontAttributes="Bold" Margin="18, 11, 0, 0" />
+                                                    </ContentView>
+                                                </ContentView>
+                                            </HorizontalStackLayout>
+                                        </Grid>
+                                    </SwipeView>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Border>
+                </Grid>
             </VerticalStackLayout>
         </ScrollView>
     </Grid>

@@ -34,11 +34,15 @@ public partial class MainViewModel : ObservableObject
     {
         if (!string.IsNullOrWhiteSpace(text) && !taskService.IsDuplicate(new Task { Title = Text }))
         {
-            taskService.Add(new Task { Title = text });
+            char upper = char.ToUpper(text[0]);
+            taskService.Add(new Task { Title = upper + text.Substring(1).ToLower() });
             text = string.Empty;
         }
     }
 
     [RelayCommand]
     public void CompleteTask(Task task) => taskService.Complete(task);
+
+    [RelayCommand]
+    public void DeleteTask(Task task) => taskService.Delete(task);
 }

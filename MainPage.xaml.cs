@@ -28,30 +28,5 @@ public partial class MainPage : ContentPage
         animatedArrow.IsVisible = false;
         animatedArrow.IsAnimationEnabled = false;
     }
-
-    private void deleteTaskButton_Clicked(object sender, EventArgs e)
-    {
-        //int totalTasks = taskService.TotalTasks();
-        //if (totalTasks == 0)
-        //{
-        //    animatedPlusIcon.IsAnimationEnabled = true;
-        //    animatedPlusIcon.IsVisible = true;
-
-        //    var duration = animatedPlusIcon.Duration;
-        //    timer = new System.Timers.Timer();
-        //    timer.Interval = duration.TotalMilliseconds;
-        //    timer.Elapsed += AnimationCompleted;
-        //    timer.Start();
-        //}
-    }
-
-    //private void AnimationCompleted(object? sender, ElapsedEventArgs e)
-    //{
-    //    timer.AutoReset = true;
-    //    timer.Stop();
-
-    //    animatedPlusIcon.IsAnimationEnabled = false;
-    //    animatedPlusIcon.IsVisible = false;
-    //}
 }
 
