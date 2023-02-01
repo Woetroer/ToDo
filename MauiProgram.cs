@@ -1,5 +1,6 @@
-﻿using CommunityToolkit.Maui.Core;
+﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using Mopups.Hosting;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 using Todo.Viewmodel;
 using ToDo.Viewmodel;
@@ -13,8 +14,9 @@ public static class MauiProgram
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
+            .UseMauiCommunityToolkit()
             .UseSkiaSharp()
-            .UseMauiCommunityToolkitCore()
+            .ConfigureMopups()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Mopups:PopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
+             xmlns:Animations="clr-namespace:Mopups.Animations;assembly=Mopups"
+             x:Class="Todo.PopupPage"
+             Background="{StaticResource Gray950}"
+             CloseWhenBackgroundIsClicked="True">
+
+    <Mopups:PopupPage.Animation>
+        <Animations:ScaleAnimation PositionIn="Bottom" PositionOut="Top" DurationIn="600" DurationOut="200" ScaleIn="1" ScaleOut="0.7"/>
+    </Mopups:PopupPage.Animation>
+
+    <Border StrokeThickness="4" StrokeShape="RoundRectangle 30,30,30,30" Background="{StaticResource Gray950}" HeightRequest="322" WidthRequest="310">
+        <Border.Stroke>
+            <LinearGradientBrush EndPoint="0,1">
+                <GradientStop Color="White"
+                          Offset="0.1" />
+                <GradientStop Color="{StaticResource Gray950}"
+                          Offset="1.0" />
+            </LinearGradientBrush>
+        </Border.Stroke>
+        <VerticalStackLayout>
+            <Editor x:Name="taskTitleEntry"  VerticalTextAlignment="Center" HeightRequest="50" Margin="0, 27, 0, 29" BackgroundColor="{StaticResource Gray950}" Placeholder="Task Title" PlaceholderColor="{StaticResource Gray400}" WidthRequest="200" TextColor="White" Text="{Binding taskTitle}" MaxLength="22">
+                <Editor.Keyboard>
+                    <Keyboard x:FactoryMethod="Create">
+                        <x:Arguments>
+                            <KeyboardFlags>CapitalizeSentence</KeyboardFlags>
+                        </x:Arguments>
+                    </Keyboard>
+                </Editor.Keyboard>
+            </Editor>
+            <Editor TextColor="White" x:Name="descriptionEntry" HeightRequest="100" Margin="0, 0, 0, 15" BackgroundColor="{StaticResource Gray900}" Placeholder="Description" PlaceholderColor="{StaticResource Gray400}" WidthRequest="200" Text="{Binding taskDescription}" VerticalTextAlignment="Start">
+                <Editor.Keyboard>
+                    <Keyboard x:FactoryMethod="Create">
+                        <x:Arguments>
+                            <KeyboardFlags>CapitalizeSentence</KeyboardFlags>
+                        </x:Arguments>
+                    </Keyboard>
+                </Editor.Keyboard>
+            </Editor>
+            <Button x:Name="addTaskButton" Margin="0, 20, 0, 0" CornerRadius="8" Text="Done" TextColor="Black" BackgroundColor="White" WidthRequest="200" Command="{Binding AddTaskCommand}"></Button>
+        </VerticalStackLayout>
+    </Border>
+</Mopups:PopupPage>

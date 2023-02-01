@@ -5,8 +5,6 @@ namespace Todo;
 public partial class MainPage : ContentPage
 {
 
-    private static System.Timers.Timer timer;
-
     TaskService taskService = new();
     public MainPage(MainViewModel vm)
     {
