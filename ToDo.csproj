@@ -13,7 +13,7 @@
 		<EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
 
 		<!-- Display name -->
-		<ApplicationTitle>Todo</ApplicationTitle>
+		<ApplicationTitle>ToDo</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.todo</ApplicationId>
@@ -33,10 +33,10 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" Color="#ffffff" />
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" Color="#FFFFFF" TintColor="#4A80D8" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#000000" Resize="false" />
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#3066BE" Resize="false" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -60,14 +60,12 @@
 		</PackageReference>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="Mopups" Version="1.1.0" />
+		<PackageReference Include="Sharpnado.Tabs.Maui" Version="3.0.1" />
 		<PackageReference Include="SkiaSharp.Extended.UI.Maui" Version="2.0.0-preview.61" />
-		<PackageReference Include="Syncfusion.Maui.Core" Version="20.4.42" />
+		<PackageReference Include="Syncfusion.Maui.Core" Version="20.4.48" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="History.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="PopupPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

@@ -4,42 +4,65 @@
              xmlns:Mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
              xmlns:Animations="clr-namespace:Mopups.Animations;assembly=Mopups"
              x:Class="Todo.PopupPage"
-             Background="{StaticResource Gray950}"
+             xmlns:viewmodel="clr-namespace:Todo.Viewmodel"
+             x:DataType="viewmodel:AddTaskPopUpViewModel"
+             Background="Transparent"
              CloseWhenBackgroundIsClicked="True">
 
+    <Mopups:PopupPage.BindingContext>
+        <viewmodel:AddTaskPopUpViewModel/>
+    </Mopups:PopupPage.BindingContext>
+
     <Mopups:PopupPage.Animation>
-        <Animations:ScaleAnimation PositionIn="Bottom" PositionOut="Top" DurationIn="600" DurationOut="200" ScaleIn="1" ScaleOut="0.7"/>
+        <Animations:ScaleAnimation PositionIn="Bottom" PositionOut="Top" DurationIn="320" DurationOut="200" ScaleIn="1" ScaleOut="0.7"/>
     </Mopups:PopupPage.Animation>
 
-    <Border StrokeThickness="4" StrokeShape="RoundRectangle 30,30,30,30" Background="{StaticResource Gray950}" HeightRequest="322" WidthRequest="310">
+    <Border StrokeThickness="4" StrokeShape="RoundRectangle 30,30,30,30" Background="White" HeightRequest="322" WidthRequest="310">
         <Border.Stroke>
-            <LinearGradientBrush EndPoint="0,1">
-                <GradientStop Color="White"
-                          Offset="0.1" />
-                <GradientStop Color="{StaticResource Gray950}"
-                          Offset="1.0" />
-            </LinearGradientBrush>
+            <SolidColorBrush Color="White"/>
         </Border.Stroke>
-        <VerticalStackLayout>
-            <Editor x:Name="taskTitleEntry"  VerticalTextAlignment="Center" HeightRequest="50" Margin="0, 27, 0, 29" BackgroundColor="{StaticResource Gray950}" Placeholder="Task Title" PlaceholderColor="{StaticResource Gray400}" WidthRequest="200" TextColor="White" Text="{Binding taskTitle}" MaxLength="22">
-                <Editor.Keyboard>
-                    <Keyboard x:FactoryMethod="Create">
-                        <x:Arguments>
-                            <KeyboardFlags>CapitalizeSentence</KeyboardFlags>
-                        </x:Arguments>
-                    </Keyboard>
-                </Editor.Keyboard>
-            </Editor>
-            <Editor TextColor="White" x:Name="descriptionEntry" HeightRequest="100" Margin="0, 0, 0, 15" BackgroundColor="{StaticResource Gray900}" Placeholder="Description" PlaceholderColor="{StaticResource Gray400}" WidthRequest="200" Text="{Binding taskDescription}" VerticalTextAlignment="Start">
-                <Editor.Keyboard>
-                    <Keyboard x:FactoryMethod="Create">
-                        <x:Arguments>
-                            <KeyboardFlags>CapitalizeSentence</KeyboardFlags>
-                        </x:Arguments>
-                    </Keyboard>
-                </Editor.Keyboard>
-            </Editor>
-            <Button x:Name="addTaskButton" Margin="0, 20, 0, 0" CornerRadius="8" Text="Done" TextColor="Black" BackgroundColor="White" WidthRequest="200" Command="{Binding AddTaskCommand}"></Button>
-        </VerticalStackLayout>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Border StrokeShape="{RoundRectangle CornerRadius=10}" Grid.Column="1" Grid.Row="0" StrokeThickness="1" Background="White" HeightRequest="47" Padding="3,0">
+                <Editor Grid.Column="1" Grid.Row="0" x:Name="taskTitleEntry" TextColor="black" VerticalTextAlignment="Center" BackgroundColor="Transparent" Placeholder="Task Title" PlaceholderColor="{StaticResource Gray500}" WidthRequest="185" Text="{Binding TaskTitle}" MaxLength="22" Margin="0, 0, 0, 2">
+                    <Editor.Keyboard>
+                        <Keyboard x:FactoryMethod="Create">
+                            <x:Arguments>
+                                <KeyboardFlags>CapitalizeSentence</KeyboardFlags>
+                            </x:Arguments>
+                        </Keyboard>
+                    </Editor.Keyboard>
+                </Editor>
+            </Border>
+
+            <Border StrokeShape="{RoundRectangle CornerRadius=10}" Grid.Column="1" Grid.Row="1" StrokeThickness="1" Background="White" Padding="10, 6, 10, 4" HeightRequest="120">
+                <Editor TextColor="black" x:Name="descriptionEntry" BackgroundColor="Transparent" Placeholder="Description" PlaceholderColor="{StaticResource Gray500}" Text="{Binding TaskDescription}" VerticalTextAlignment="Start">
+                    <Editor.Keyboard>
+                        <Keyboard x:FactoryMethod="Create">
+                            <x:Arguments>
+                                <KeyboardFlags>CapitalizeSentence</KeyboardFlags>
+                            </x:Arguments>
+                        </Keyboard>
+                    </Editor.Keyboard>
+                </Editor>
+            </Border>
+            <Button HeightRequest="48" Margin="0, 5, 0, 0"  Grid.Column="1" Grid.Row="2" FontSize="16" x:Name="addTaskButton" CornerRadius="12" Text="Create" TextColor="{StaticResource Primary}" FontAttributes="Bold" Command="{Binding AddTaskCommand}" Clicked="addTaskButton_Clicked">
+                <Button.Shadow>
+                    <Shadow Brush="Black"
+                    Radius="14"
+                    Opacity="0.70" />
+                </Button.Shadow>
+            </Button>
+        </Grid>
     </Border>
 </Mopups:PopupPage>

@@ -1,5 +1,5 @@
 ﻿using Todo.Services;
-using ToDo.Viewmodel;
+using Todo.Viewmodel;
 namespace Todo;
 
 public partial class MainPage : ContentPage
@@ -10,21 +10,49 @@ public partial class MainPage : ContentPage
     {
         InitializeComponent();
         BindingContext = vm;
-        int total = taskService.TotalTasks();
-        if (total == 0)
+    }
+
+    private void homeButton_Clicked(object sender, EventArgs e)
+    {
+        homeButton.TextColor = Color.FromArgb("#3066BE");
+        historyButton.TextColor = Color.FromArgb("#0090DB");
+        historyButton.FontAttributes = FontAttributes.None;
+        taskView.IsVisible = true;
+        historyView.IsVisible = false;
+        viewTitle.Text = "Tasks";
+    }
+
+    private void historyButton_Clicked(object sender, EventArgs e)
+    {
+        historyButton.TextColor = Color.FromArgb("#3066BE");
+        homeButton.TextColor = Color.FromArgb("#0090DB");
+        historyView.IsVisible = true;
+        taskView.IsVisible = false;
+        viewTitle.Text = "Completed";
+    }
+
+    private void swipedRight_Swiped(object sender, SwipedEventArgs e)
+    {
+        if (historyView.IsVisible)
         {
-            animatedArrow.IsVisible = true;
-            animatedArrow.IsAnimationEnabled = true;
+            historyView.IsVisible = false;
+            taskView.IsVisible = true;
+            homeButton.TextColor = Color.FromArgb("#3066BE");
+            historyButton.TextColor = Color.FromArgb("#0090DB");
+            viewTitle.Text = "Tasks";
         }
     }
 
-    private void addTaskButton_Clicked(object sender, EventArgs e)
+    private void swipedLeft_Swiped(object sender, SwipedEventArgs e)
     {
-        addTaskEntry.Text = string.Empty;
-        addTaskEntry.IsEnabled = false; // Hide keyboard after adding task
-        addTaskEntry.IsEnabled = true;
-        animatedArrow.IsVisible = false;
-        animatedArrow.IsAnimationEnabled = false;
+        if (taskView.IsVisible)
+        {
+            taskView.IsVisible = false;
+            historyView.IsVisible = true;
+            historyButton.TextColor = Color.FromArgb("#3066BE");
+            homeButton.TextColor = Color.FromArgb("#0090DB");
+            viewTitle.Text = "Completed";
+        }
     }
 }
 

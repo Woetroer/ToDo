@@ -2,12 +2,11 @@
 using CommunityToolkit.Mvvm.Input;
 using Mopups.Services;
 using System.Collections.ObjectModel;
-using Todo;
 using Todo.Data;
 using Todo.Services;
 using Task = Todo.Models.Task;
 
-namespace ToDo.Viewmodel;
+namespace Todo.Viewmodel;
 
 public partial class MainViewModel : ObservableObject
 {
@@ -23,10 +22,14 @@ public partial class MainViewModel : ObservableObject
     {
         using var db = new TaskContext();
         Tasks = new ObservableCollection<Task>(db.Tasks.Where(task => task.IsCompleted == false));
+        CompletedTasks = new ObservableCollection<Task>(db.Tasks.Where(task => task.IsCompleted == true).OrderByDescending(task => task.Id));
     }
 
     [ObservableProperty]
     ObservableCollection<Task> tasks;
+
+    [ObservableProperty]
+    ObservableCollection<Task> completedTasks;
 
     [ObservableProperty]
     string text;
@@ -49,4 +52,12 @@ public partial class MainViewModel : ObservableObject
 
     [RelayCommand]
     public void DeleteTask(Task task) => taskService.Delete(task);
+
+    [RelayCommand]
+    public void DeleteHistory() => taskService.DeleteHistory();
+
+    [RelayCommand]
+    public void SwipedRight()
+    {
+    }
 }

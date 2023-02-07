@@ -5,24 +5,19 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Todo">
     
-    <TabBar>
+    <!--<TabBar>
         <Tab Title="Home" Icon="home.png">
             <ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>
         </Tab>
         <Tab Title="History" Icon="history.png">
             <ShellContent ContentTemplate="{DataTemplate local:History}"/>
         </Tab>
-    </TabBar>
+    </TabBar>-->
 
-    <!--<FlyoutItem Title="Home" Icon="home.png">
+    <FlyoutItem Title="Home" Icon="home.png">
 
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>
         </Tab>
     </FlyoutItem>
-    <FlyoutItem Title="Historie" Icon="History.png">
-        <Tab>
-            <ShellContent ContentTemplate="{DataTemplate local:History}"/>
-        </Tab>
-    </FlyoutItem>-->
 </Shell>
