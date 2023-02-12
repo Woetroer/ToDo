@@ -33,7 +33,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Border StrokeShape="{RoundRectangle CornerRadius=10}" Grid.Column="1" Grid.Row="0" StrokeThickness="1" Background="White" HeightRequest="47" Padding="3,0">
+            <Border StrokeShape="{RoundRectangle CornerRadius=10}" Grid.Column="1" Grid.Row="0" StrokeThickness="1" Background="White" HeightRequest="47" Padding="0, 5, 0 ,0">
                 <Editor Grid.Column="1" Grid.Row="0" x:Name="taskTitleEntry" TextColor="black" VerticalTextAlignment="Center" BackgroundColor="Transparent" Placeholder="Task Title" PlaceholderColor="{StaticResource Gray500}" WidthRequest="185" Text="{Binding TaskTitle}" MaxLength="22" Margin="0, 0, 0, 2">
                     <Editor.Keyboard>
                         <Keyboard x:FactoryMethod="Create">
@@ -56,11 +56,11 @@
                     </Editor.Keyboard>
                 </Editor>
             </Border>
-            <Button HeightRequest="48" Margin="0, 5, 0, 0"  Grid.Column="1" Grid.Row="2" FontSize="16" x:Name="addTaskButton" CornerRadius="12" Text="Create" TextColor="{StaticResource Primary}" FontAttributes="Bold" Command="{Binding AddTaskCommand}" Clicked="addTaskButton_Clicked">
+            <Button HeightRequest="48" Margin="0, 5, 0, 0"  Grid.Column="1" Grid.Row="2" FontSize="15" x:Name="addTaskButton" CornerRadius="12" Text="Create" TextColor="{StaticResource Primary}" FontAttributes="Bold" Command="{Binding AddTaskCommand}" Clicked="addTaskButton_Clicked">
                 <Button.Shadow>
                     <Shadow Brush="Black"
                     Radius="14"
-                    Opacity="0.70" />
+                    Opacity="0.55" />
                 </Button.Shadow>
             </Button>
         </Grid>

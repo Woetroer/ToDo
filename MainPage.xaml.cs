@@ -14,32 +14,35 @@ public partial class MainPage : ContentPage
 
     private void homeButton_Clicked(object sender, EventArgs e)
     {
+        ((MainViewModel)(this.BindingContext)).TaskViewVisible = true;
+        historyView.IsVisible = false;
+
         homeButton.TextColor = Color.FromArgb("#3066BE");
         historyButton.TextColor = Color.FromArgb("#0090DB");
         historyButton.FontAttributes = FontAttributes.None;
-        taskView.IsVisible = true;
-        historyView.IsVisible = false;
-        viewTitle.Text = "Tasks";
+        titleImage.Source = "tasks.png";
     }
 
     private void historyButton_Clicked(object sender, EventArgs e)
     {
+        ((MainViewModel)(this.BindingContext)).TaskViewVisible = false;
+        historyView.IsVisible = true;
+
         historyButton.TextColor = Color.FromArgb("#3066BE");
         homeButton.TextColor = Color.FromArgb("#0090DB");
-        historyView.IsVisible = true;
-        taskView.IsVisible = false;
-        viewTitle.Text = "Completed";
+        titleImage.Source = "completed.png";
     }
 
     private void swipedRight_Swiped(object sender, SwipedEventArgs e)
     {
         if (historyView.IsVisible)
         {
+            ((MainViewModel)(this.BindingContext)).TaskViewVisible = true;
             historyView.IsVisible = false;
-            taskView.IsVisible = true;
+
             homeButton.TextColor = Color.FromArgb("#3066BE");
             historyButton.TextColor = Color.FromArgb("#0090DB");
-            viewTitle.Text = "Tasks";
+            titleImage.Source = "tasks.png";
         }
     }
 
@@ -47,11 +50,12 @@ public partial class MainPage : ContentPage
     {
         if (taskView.IsVisible)
         {
-            taskView.IsVisible = false;
+            ((MainViewModel)(this.BindingContext)).TaskViewVisible = false;
             historyView.IsVisible = true;
+
             historyButton.TextColor = Color.FromArgb("#3066BE");
             homeButton.TextColor = Color.FromArgb("#0090DB");
-            viewTitle.Text = "Completed";
+            titleImage.Source = "completed.png";
         }
     }
 }

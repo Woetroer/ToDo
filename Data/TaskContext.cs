@@ -13,7 +13,7 @@ namespace Todo.Data
         {
             var folder = Environment.SpecialFolder.LocalApplicationData;
             var path = Environment.GetFolderPath(folder);
-            DbPath = System.IO.Path.Join(path, "ToDo.db");
+            DbPath = System.IO.Path.Join(path, "Todo.db");
             Database.EnsureCreated();
         }
 

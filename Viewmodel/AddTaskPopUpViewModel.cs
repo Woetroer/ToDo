@@ -21,7 +21,7 @@ partial class AddTaskPopUpViewModel : ObservableObject
         if (taskTitle != null & taskDescription != null)
         {
             taskService.Add(new Task
-            { Title = taskTitle/*, Description = taskDescription */});
+            { Title = taskTitle, Description = taskDescription });
         }
     }
 }

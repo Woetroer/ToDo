@@ -23,6 +23,7 @@ public partial class MainViewModel : ObservableObject
         using var db = new TaskContext();
         Tasks = new ObservableCollection<Task>(db.Tasks.Where(task => task.IsCompleted == false));
         CompletedTasks = new ObservableCollection<Task>(db.Tasks.Where(task => task.IsCompleted == true).OrderByDescending(task => task.Id));
+        taskViewVisible = true;
     }
 
     [ObservableProperty]
@@ -32,7 +33,7 @@ public partial class MainViewModel : ObservableObject
     ObservableCollection<Task> completedTasks;
 
     [ObservableProperty]
-    string text;
+    bool taskViewVisible;
 
     [RelayCommand]
     void AddTask()
@@ -54,10 +55,10 @@ public partial class MainViewModel : ObservableObject
     public void DeleteTask(Task task) => taskService.Delete(task);
 
     [RelayCommand]
-    public void DeleteHistory() => taskService.DeleteHistory();
-
-    [RelayCommand]
-    public void SwipedRight()
+    public void Clear(bool taskViewVisible)
     {
+        if (taskViewVisible) taskService.DeleteAll();
+        else taskService.DeleteCompleted();
     }
+
 }

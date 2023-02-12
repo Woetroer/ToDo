@@ -17,12 +17,14 @@
     <mct:DockLayout x:Name="TaskPage" >
         <Grid mct:DockLayout.DockPosition="Top" BackgroundColor="White" HeightRequest="82">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="22"/>
-                <ColumnDefinition Width="180"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label x:Name="viewTitle" Text="Tasks" Grid.Column="1" VerticalTextAlignment="Center" FontSize="30" FontAttributes="Bold" FontFamily="calibri" TextColor="{StaticResource Primary}"/>
+            <!--<Rectangle Grid.Row="2" Fill="{StaticResource Primary}" ></Rectangle>-->
+            <Image x:Name="titleImage" Grid.Column="0" Source="tasks.png" HeightRequest="170" Margin="7, 0, 0, 0"/>
+            <Button x:Name="clearButton" Background="{StaticResource Primary}" Grid.Column="1" FontFamily="Calibri" Text="Clear All" FontSize="13" FontAttributes="Bold" TextColor="white" HeightRequest="35" WidthRequest="142" CornerRadius="8" Command="{Binding BindingContext.ClearCommand, Source={x:Reference TaskPage}}" CommandParameter="{Binding TaskViewVisible}" Padding="0, 1, 0, 0"/>
         </Grid>
+
         <Grid x:Name="bottomTab" mct:DockLayout.DockPosition="Bottom" BackgroundColor="White" HeightRequest="82">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -46,11 +48,11 @@
                 <SwipeGestureRecognizer x:Name="swipedLeft" Direction="Left" Swiped="swipedLeft_Swiped"/>
             </VerticalStackLayout.GestureRecognizers>
 
-            <Grid x:Name="taskView">
+            <Grid x:Name="taskView" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Border StrokeShape="{RoundRectangle CornerRadius=7}" StrokeThickness="0" Grid.Row="0">
+                <Border StrokeShape="{RoundRectangle CornerRadius=8}" StrokeThickness="0" Grid.Row="0">
                     <ScrollView>
                         <CollectionView ItemsSource="{Binding Tasks}">
                             <CollectionView.ItemTemplate>
@@ -74,7 +76,6 @@
                                         </SwipeView.RightItems>
                                         <Grid HeightRequest="45" BackgroundColor="white">
                                             <HorizontalStackLayout>
-                                                <!--<Label Text="■" FontSize="18" Margin="10, 9, 0, 0" TextColor="Black"></Label>-->
                                                 <ContentView BackgroundColor="{StaticResource Gray400}" Padding="0, 0, 0, 1" WidthRequest="10000">
                                                     <ContentView BackgroundColor="White">
                                                         <Label FontSize="16" TextColor="Black" Text="{Binding Title}" FontAttributes="Bold" Margin="18, 11, 0, 0" />
@@ -93,21 +94,21 @@
             <Grid x:Name="historyView" IsVisible="false">
                 <ScrollView>
                     <VerticalStackLayout>
-                        <Button FontFamily="Calibri" Text="Clear All" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource Primary}" CornerRadius="8" Command="{Binding BindingContext.DeleteHistoryCommand, Source={x:Reference TaskPage}}"></Button>
-                        <Border StrokeShape="{RoundRectangle CornerRadius=7}" StrokeThickness="0" Margin="0, 28, 0, 0">
+                        <Border StrokeShape="{RoundRectangle CornerRadius=8}" StrokeThickness="0">
                             <CollectionView ItemsSource="{Binding CompletedTasks}">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
                                         <SwipeView>
                                             <SwipeView.RightItems>
                                                 <SwipeItem
+                                                BackgroundColor="{StaticResource Secondary}"
                                                 IconImageSource="bin.png"
                                                 Command="{Binding BindingContext.DeleteTaskCommand, Source={x:Reference TaskPage}}"
-                                                 CommandParameter="{Binding .}"/>
+                                                CommandParameter="{Binding .}"/>
                                             </SwipeView.RightItems>
-                                            <Grid HeightRequest="48" BackgroundColor="{StaticResource Gray900}" Margin="0, 1, 0, 0">
+                                            <Grid HeightRequest="48" BackgroundColor="white" Margin="0, 1, 0, 0">
                                                 <HorizontalStackLayout>
-                                                    <Label FontSize="17" TextColor="White" Text="{Binding Title}" FontAttributes="Bold" Margin="27, 13, 0, 0"/>
+                                                    <Label FontSize="16" TextColor="black" Text="{Binding Title}" FontAttributes="Bold" Margin="27, 13, 0, 0"/>
                                                 </HorizontalStackLayout>
                                             </Grid>
                                         </SwipeView>

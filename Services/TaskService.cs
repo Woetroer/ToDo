@@ -45,24 +45,33 @@ namespace Todo.Services
             return false;
         }
 
-        public int TotalTasks()
+        public int Total()
         {
             using var db = new TaskContext();
             return db.Tasks.Where(task => task.IsCompleted == false).Count();
         }
 
-        public void DeleteHistory()
+        public void DeleteAll()
         {
             using var db = new TaskContext();
             if (db.Tasks.Count() > 0)
             {
                 foreach (Task task in db.Tasks)
-                {
-                    if (task.Title.Contains('('))
-                    {
-                        db.Tasks.Remove(task);
-                    }
-                }
+                    if (!task.IsCompleted) db.Tasks.Remove(task);
+
+                db.SaveChanges();
+                OnTasksChanged?.Invoke(db.Tasks.ToList());
+            }
+        }
+
+        public void DeleteCompleted()
+        {
+            using var db = new TaskContext();
+            if (db.Tasks.Count() > 0)
+            {
+                foreach (Task task in db.Tasks)
+                    if (task.IsCompleted) db.Tasks.Remove(task);
+
                 db.SaveChanges();
                 OnTasksChanged?.Invoke(db.Tasks.ToList());
             }
