@@ -22,7 +22,7 @@ public partial class MainViewModel : ObservableObject
     {
         using var db = new TaskContext();
         Tasks = new ObservableCollection<Task>(db.Tasks.Where(task => task.IsCompleted == false));
-        CompletedTasks = new ObservableCollection<Task>(db.Tasks.Where(task => task.IsCompleted == true).OrderByDescending(task => task.Id));
+        CompletedTasks = db.Tasks.Where(task => task.IsCompleted == true).OrderByDescending(task => task.Id).ToList();
         taskViewVisible = true;
     }
 
@@ -30,7 +30,7 @@ public partial class MainViewModel : ObservableObject
     ObservableCollection<Task> tasks;
 
     [ObservableProperty]
-    ObservableCollection<Task> completedTasks;
+    List<Task> completedTasks;
 
     [ObservableProperty]
     bool taskViewVisible;

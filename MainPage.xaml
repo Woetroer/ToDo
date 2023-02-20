@@ -4,6 +4,7 @@
              xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
              xmlns:models="clr-namespace:Todo.Models"
              xmlns:mct="clr-namespace:CommunityToolkit.Maui.Layouts;assembly=CommunityToolkit.Maui"
+             xmlns:mctb="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              xmlns:effectsView="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
              x:Class="Todo.MainPage"
              xmlns:viewmodel="clr-namespace:Todo.Viewmodel"
@@ -13,6 +14,10 @@
     <ContentPage.BindingContext>
         <viewmodel:MainViewModel />
     </ContentPage.BindingContext>
+
+    <ContentPage.Behaviors>
+        <mctb:StatusBarBehavior StatusBarColor="white" />
+    </ContentPage.Behaviors>
 
     <mct:DockLayout x:Name="TaskPage" >
         <Grid mct:DockLayout.DockPosition="Top" BackgroundColor="White" HeightRequest="82">
@@ -31,6 +36,7 @@
                 <ColumnDefinition Width="80"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+            
             <Button x:Name="homeButton" Grid.Column="0" HeightRequest="60" Text="{x:Static models:FASolidIcons.House}" FontFamily="FASolid" TextColor="{StaticResource Primary}" FontSize="24" FontAttributes="Bold" Background="Transparent" Clicked="homeButton_Clicked"/>
             <Button x:Name="historyButton" Grid.Column="2" HeightRequest="60" Text="{x:Static models:FASolidIcons.CheckDouble}" FontFamily="FASolid" TextColor="{StaticResource Secondary}" FontSize="24" Background="Transparent" Clicked="historyButton_Clicked" Margin="0, 4, 0, 0"/>
             <Button x:Name="addTaskButton" Grid.Column="1" Text="{x:Static models:FASolidIcons.Pencil}" FontFamily="FASolid" FontSize="28" TextColor="{StaticResource Primary}" HeightRequest="58" WidthRequest="94" Command="{Binding AddTaskCommand}" CornerRadius="28" Margin="10, 0, 10, 0">
@@ -48,7 +54,7 @@
                 <SwipeGestureRecognizer x:Name="swipedLeft" Direction="Left" Swiped="swipedLeft_Swiped"/>
             </VerticalStackLayout.GestureRecognizers>
 
-            <Grid x:Name="taskView" >
+            <Grid x:Name="taskView">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
@@ -60,19 +66,19 @@
                                     <SwipeView>
                                         <SwipeView.LeftItems>
                                             <SwipeItem
-                                            x:Name="deleteTaskButton"
-                                            IconImageSource="bin.png"
-                                            BackgroundColor="{StaticResource Secondary}"
-                                            Command="{Binding BindingContext.DeleteTaskCommand, Source={x:Reference TaskPage}}"
-                                            CommandParameter="{Binding .}" />
+                                                    x:Name="deleteTaskButton"
+                                                    IconImageSource="bin.png"
+                                                    BackgroundColor="{StaticResource Secondary}"
+                                                    Command="{Binding BindingContext.DeleteTaskCommand, Source={x:Reference TaskPage}}"
+                                                    CommandParameter="{Binding .}" />
                                         </SwipeView.LeftItems>
                                         <SwipeView.RightItems>
                                             <SwipeItem
-                                            x:Name="completeTaskButton"
-                                            IconImageSource="checkmark.png"
-                                            BackgroundColor="{StaticResource Secondary}"
-                                            Command="{Binding BindingContext.CompleteTaskCommand, Source={x:Reference TaskPage}}"
-                                            CommandParameter="{Binding .}" />
+                                                    x:Name="completeTaskButton"
+                                                    IconImageSource="checkmark.png"
+                                                    BackgroundColor="{StaticResource Secondary}"
+                                                    Command="{Binding BindingContext.CompleteTaskCommand, Source={x:Reference TaskPage}}"
+                                                    CommandParameter="{Binding .}" />
                                         </SwipeView.RightItems>
                                         <Grid HeightRequest="45" BackgroundColor="white">
                                             <HorizontalStackLayout>
@@ -101,10 +107,10 @@
                                         <SwipeView>
                                             <SwipeView.RightItems>
                                                 <SwipeItem
-                                                BackgroundColor="{StaticResource Secondary}"
-                                                IconImageSource="bin.png"
-                                                Command="{Binding BindingContext.DeleteTaskCommand, Source={x:Reference TaskPage}}"
-                                                CommandParameter="{Binding .}"/>
+                                                    BackgroundColor="{StaticResource Secondary}"
+                                                    IconImageSource="bin.png"
+                                                    Command="{Binding BindingContext.DeleteTaskCommand, Source={x:Reference TaskPage}}"
+                                                    CommandParameter="{Binding .}"/>
                                             </SwipeView.RightItems>
                                             <Grid HeightRequest="48" BackgroundColor="white" Margin="0, 1, 0, 0">
                                                 <HorizontalStackLayout>

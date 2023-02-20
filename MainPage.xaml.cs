@@ -31,6 +31,7 @@ public partial class MainPage : ContentPage
         historyButton.TextColor = Color.FromArgb("#3066BE");
         homeButton.TextColor = Color.FromArgb("#0090DB");
         titleImage.Source = "completed.png";
+        addTaskButton.FadeTo(200);
     }
 
     private void swipedRight_Swiped(object sender, SwipedEventArgs e)
@@ -56,7 +57,25 @@ public partial class MainPage : ContentPage
             historyButton.TextColor = Color.FromArgb("#3066BE");
             homeButton.TextColor = Color.FromArgb("#0090DB");
             titleImage.Source = "completed.png";
+
+            //titleImage.IsVisible = false;
+            //await titleImage.FadeIn(100, Easing.SinIn);
         }
+    }
+}
+
+public static class VisualElementExtensions
+{
+    public static async System.Threading.Tasks.Task FadeOut(this VisualElement element, uint duration = 400, Easing easing = null)
+    {
+        await element.FadeTo(0, duration, easing);
+        element.IsVisible = false;
+    }
+
+    public static async System.Threading.Tasks.Task FadeIn(this VisualElement element, uint duration = 400, Easing easing = null)
+    {
+        await element.FadeTo(1, duration, easing);
+        element.IsVisible = true;
     }
 }
 
