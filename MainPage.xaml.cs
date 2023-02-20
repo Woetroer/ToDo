@@ -15,6 +15,7 @@ public partial class MainPage : ContentPage
     private void homeButton_Clicked(object sender, EventArgs e)
     {
         ((MainViewModel)(this.BindingContext)).TaskViewVisible = true;
+        taskView.IsVisible = true;
         historyView.IsVisible = false;
 
         homeButton.TextColor = Color.FromArgb("#3066BE");
@@ -26,6 +27,7 @@ public partial class MainPage : ContentPage
     private void historyButton_Clicked(object sender, EventArgs e)
     {
         ((MainViewModel)(this.BindingContext)).TaskViewVisible = false;
+        taskView.IsVisible = false;
         historyView.IsVisible = true;
 
         historyButton.TextColor = Color.FromArgb("#3066BE");
@@ -39,6 +41,7 @@ public partial class MainPage : ContentPage
         if (historyView.IsVisible)
         {
             ((MainViewModel)(this.BindingContext)).TaskViewVisible = true;
+            taskView.IsVisible = true;
             historyView.IsVisible = false;
 
             homeButton.TextColor = Color.FromArgb("#3066BE");
@@ -52,6 +55,7 @@ public partial class MainPage : ContentPage
         if (taskView.IsVisible)
         {
             ((MainViewModel)(this.BindingContext)).TaskViewVisible = false;
+            taskView.IsVisible = false;
             historyView.IsVisible = true;
 
             historyButton.TextColor = Color.FromArgb("#3066BE");

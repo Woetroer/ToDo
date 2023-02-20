@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Mopups.Services;
-using System.Collections.ObjectModel;
 using Todo.Data;
 using Todo.Services;
 using Task = Todo.Models.Task;
@@ -21,13 +20,13 @@ public partial class MainViewModel : ObservableObject
     public void RefreshLibrary(List<Task> tasks = null)
     {
         using var db = new TaskContext();
-        Tasks = new ObservableCollection<Task>(db.Tasks.Where(task => task.IsCompleted == false));
-        CompletedTasks = db.Tasks.Where(task => task.IsCompleted == true).OrderByDescending(task => task.Id).ToList();
+        Tasks = db.Tasks.Where(task => !task.IsCompleted).ToList();
+        CompletedTasks = db.Tasks.Where(task => task.IsCompleted).ToList();
         taskViewVisible = true;
     }
 
     [ObservableProperty]
-    ObservableCollection<Task> tasks;
+    List<Task> tasks;
 
     [ObservableProperty]
     List<Task> completedTasks;
