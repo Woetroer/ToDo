@@ -18,7 +18,7 @@ partial class AddTaskPopUpViewModel : ObservableObject
     [RelayCommand]
     void AddTask()
     {
-        if (taskTitle != null & taskDescription != null)
+        if (taskTitle != null)
         {
             taskService.Add(new Task
             { Title = taskTitle, Description = taskDescription });
