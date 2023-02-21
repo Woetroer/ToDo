@@ -1,4 +1,5 @@
-﻿using Todo.Services;
+﻿using Mopups.Services;
+using Todo.Services;
 using Todo.Viewmodel;
 namespace Todo;
 
@@ -14,39 +15,19 @@ public partial class MainPage : ContentPage
 
     private void homeButton_Clicked(object sender, EventArgs e)
     {
-        ((MainViewModel)(this.BindingContext)).TaskViewVisible = true;
-        taskView.IsVisible = true;
-        historyView.IsVisible = false;
-
-        homeButton.TextColor = Color.FromArgb("#3066BE");
-        historyButton.TextColor = Color.FromArgb("#0090DB");
-        historyButton.FontAttributes = FontAttributes.None;
-        titleImage.Source = "tasks.png";
+        ToTaskView();
     }
 
     private void historyButton_Clicked(object sender, EventArgs e)
     {
-        ((MainViewModel)(this.BindingContext)).TaskViewVisible = false;
-        taskView.IsVisible = false;
-        historyView.IsVisible = true;
-
-        historyButton.TextColor = Color.FromArgb("#3066BE");
-        homeButton.TextColor = Color.FromArgb("#0090DB");
-        titleImage.Source = "completed.png";
-        addTaskButton.FadeTo(200);
+        ToCompletedView();
     }
 
     private void swipedRight_Swiped(object sender, SwipedEventArgs e)
     {
         if (historyView.IsVisible)
         {
-            ((MainViewModel)(this.BindingContext)).TaskViewVisible = true;
-            taskView.IsVisible = true;
-            historyView.IsVisible = false;
-
-            homeButton.TextColor = Color.FromArgb("#3066BE");
-            historyButton.TextColor = Color.FromArgb("#0090DB");
-            titleImage.Source = "tasks.png";
+            ToTaskView();
         }
     }
 
@@ -54,17 +35,38 @@ public partial class MainPage : ContentPage
     {
         if (taskView.IsVisible)
         {
-            ((MainViewModel)(this.BindingContext)).TaskViewVisible = false;
-            taskView.IsVisible = false;
-            historyView.IsVisible = true;
-
-            historyButton.TextColor = Color.FromArgb("#3066BE");
-            homeButton.TextColor = Color.FromArgb("#0090DB");
-            titleImage.Source = "completed.png";
+            ToCompletedView();
 
             //titleImage.IsVisible = false;
             //await titleImage.FadeIn(100, Easing.SinIn);
         }
+    }
+
+    private void addTaskButton_Clicked(object sender, EventArgs e)
+    {
+        ToTaskView();
+        MopupService.Instance.PushAsync(new PopupPage());
+    }
+
+    public void ToTaskView()
+    {
+        // option for animation?
+        ((MainViewModel)(this.BindingContext)).TaskViewVisible = true;
+        taskView.IsVisible = true;
+        historyView.IsVisible = false;
+        homeButton.TextColor = Color.FromArgb("#3066BE");
+        historyButton.TextColor = Color.FromArgb("#0090DB");
+        titleImage.Source = "tasks.png";
+    }
+
+    public void ToCompletedView()
+    {
+        ((MainViewModel)(this.BindingContext)).TaskViewVisible = false;
+        taskView.IsVisible = false;
+        historyView.IsVisible = true;
+        historyButton.TextColor = Color.FromArgb("#3066BE");
+        homeButton.TextColor = Color.FromArgb("#0090DB");
+        titleImage.Source = "completed.png";
     }
 }
 

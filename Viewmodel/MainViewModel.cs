@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Mopups.Services;
 using Todo.Data;
 using Todo.Services;
 using Task = Todo.Models.Task;
@@ -37,14 +36,7 @@ public partial class MainViewModel : ObservableObject
     [RelayCommand]
     void AddTask()
     {
-        //if (!string.IsNullOrWhiteSpace(text) && !taskService.IsDuplicate(new Task { Title = Text }))
-        //{
-        //    char upper = char.ToUpper(text[0]);
-        //    taskService.Add(new Task { Title = upper + text.Substring(1).ToLower() });
-        //    text = string.Empty;
-        //}
-
-        MopupService.Instance.PushAsync(new PopupPage());
+        taskViewVisible = true;
     }
 
     [RelayCommand]
