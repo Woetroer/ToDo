@@ -15,13 +15,16 @@ partial class AddTaskPopUpViewModel : ObservableObject
     [ObservableProperty]
     string taskDescription;
 
+    [ObservableProperty]
+    int taskImportance;
+
     [RelayCommand]
     void AddTask()
     {
-        if (taskTitle != null)
+        if (TaskTitle != null && !taskService.IsDuplicate(TaskTitle))
         {
             taskService.Add(new Task
-            { Title = taskTitle, Description = taskDescription });
+            { Title = TaskTitle, Importance = TaskImportance });
         }
     }
 }

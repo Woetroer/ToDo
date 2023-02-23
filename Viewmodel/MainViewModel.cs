@@ -19,7 +19,7 @@ public partial class MainViewModel : ObservableObject
     public void RefreshLibrary(List<Task> tasks = null)
     {
         using var db = new TaskContext();
-        Tasks = db.Tasks.Where(task => !task.IsCompleted).ToList();
+        Tasks = db.Tasks.Where(task => !task.IsCompleted).OrderByDescending(task => task.Importance).ToList();
         CompletedTasks = db.Tasks.Where(task => task.IsCompleted).ToList();
     }
 
@@ -36,9 +36,5 @@ public partial class MainViewModel : ObservableObject
     public void DeleteTask(Task task) => taskService.Delete(task);
 
     [RelayCommand]
-    public void Clear(bool taskViewVisible)
-    {
-        taskService.DeleteCompleted();
-    }
-
+    public void Clear() => taskService.DeleteCompleted();
 }

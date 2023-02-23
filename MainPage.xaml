@@ -27,7 +27,7 @@
             </Grid.ColumnDefinitions>
             <!--<Rectangle Grid.Row="2" Fill="{StaticResource Primary}" ></Rectangle>-->
             <Image x:Name="titleImage" Grid.Column="0" Source="tasks.png" HeightRequest="170" Margin="7, 0, 0, 0"/>
-            <Button x:Name="clearButton" Background="{StaticResource Primary}" Grid.Column="1" FontFamily="Calibri" Text="Clear All" FontSize="13" FontAttributes="Bold" TextColor="white" HeightRequest="35" WidthRequest="142" CornerRadius="8" Command="{Binding BindingContext.ClearCommand, Source={x:Reference TaskPage}}" CommandParameter="{Binding TaskViewVisible}" Padding="0, 1, 0, 0"/>
+            <Button x:Name="clearButton" Background="{StaticResource Primary}" Grid.Column="1" FontFamily="Calibri" Text="Clear All" FontSize="13" FontAttributes="Bold" TextColor="white" HeightRequest="35" WidthRequest="142" CornerRadius="8" Command="{Binding BindingContext.ClearCommand, Source={x:Reference TaskPage}}" Padding="0, 1, 0, 0" IsVisible="False"/>
         </Grid>
 
         <Grid x:Name="bottomTab" mct:DockLayout.DockPosition="Bottom" BackgroundColor="White" HeightRequest="82">
@@ -38,12 +38,10 @@
             </Grid.ColumnDefinitions>
             
             <Button x:Name="homeButton" Grid.Column="0" HeightRequest="60" Text="{x:Static models:FASolidIcons.House}" FontFamily="FASolid" TextColor="{StaticResource Primary}" FontSize="24" FontAttributes="Bold" Background="Transparent" Clicked="homeButton_Clicked"/>
-            <Button x:Name="completedButton" Grid.Column="2" HeightRequest="60" Text="{x:Static models:FASolidIcons.CheckDouble}" FontFamily="FASolid" TextColor="{StaticResource Secondary}" FontSize="24" Background="Transparent" Clicked="completedButton_Clicked" Margin="0, 4, 0, 0"/>
+            <Button x:Name="completedButton" Grid.Column="2" HeightRequest="60" Text="{x:Static models:FASolidIcons.CheckDouble}" FontFamily="FASolid" TextColor="#696969" FontSize="24" Background="Transparent" Clicked="completedButton_Clicked" Margin="0, 4, 0, 0"/>
             <Button x:Name="addTaskButton" Grid.Column="1" Text="{x:Static models:FASolidIcons.Pencil}" FontFamily="FASolid" FontSize="28" TextColor="{StaticResource Primary}" HeightRequest="58" WidthRequest="94" CornerRadius="28" Margin="10, 0, 10, 0" Clicked="addTaskButton_Clicked">
                 <Button.Shadow>
-                    <Shadow Brush="Black"
-                    Radius="40"
-                    Opacity="0.8" />
+                    <Shadow Brush="Black" Radius="40" Opacity="0.8" />
                 </Button.Shadow>
             </Button>
         </Grid>
@@ -82,9 +80,22 @@
                                         </SwipeView.RightItems>
                                         <Grid HeightRequest="45" BackgroundColor="white">
                                             <HorizontalStackLayout>
-                                                <ContentView BackgroundColor="{StaticResource Gray400}" Padding="0, 0, 0, 1" WidthRequest="10000">
+                                                <ContentView BackgroundColor="{StaticResource Gray400}" Padding="0, 0, 0, 1" WidthRequest="352">
                                                     <ContentView BackgroundColor="White">
-                                                        <Label FontSize="16" TextColor="Black" Text="{Binding Title}" FontAttributes="Bold" Margin="18, 11, 0, 0" />
+                                                        <HorizontalStackLayout WidthRequest="352">
+                                                            <HorizontalStackLayout WidthRequest="300" HorizontalOptions="Start">
+                                                                <Label FontSize="16" TextColor="Black" Text="{Binding Title}" FontAttributes="Bold" Margin="18, 11, 0, 0" />
+                                                            </HorizontalStackLayout>
+                                                            <HorizontalStackLayout HorizontalOptions="End" WidthRequest="54">
+                                                                <HorizontalStackLayout.Background>
+                                                                    <LinearGradientBrush>
+                                                                        <GradientStop Color="{StaticResource Primary}" Offset="0.5" />
+                                                                        <GradientStop Color="White" Offset="1" />
+                                                                    </LinearGradientBrush>
+                                                                </HorizontalStackLayout.Background>
+                                                                <Label FontSize="16" TextColor="white" Text="{Binding Importance}" FontAttributes="Bold" Margin="16, 11, 0, 0"/>
+                                                            </HorizontalStackLayout>
+                                                        </HorizontalStackLayout>
                                                     </ContentView>
                                                 </ContentView>
                                             </HorizontalStackLayout>

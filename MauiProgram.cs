@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using Mopups.Hosting;
-using SkiaSharp.Views.Maui.Controls.Hosting;
 using Syncfusion.Maui.Core.Hosting;
 using Todo.Viewmodel;
 
@@ -17,7 +16,6 @@ public static class MauiProgram
         builder
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
-            .UseSkiaSharp()
             .ConfigureSyncfusionCore()
             .ConfigureMopups()
             .ConfigureFonts(fonts =>

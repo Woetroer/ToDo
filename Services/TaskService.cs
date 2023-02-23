@@ -37,10 +37,10 @@ namespace Todo.Services
             OnTasksChanged?.Invoke(db.Tasks.ToList());
         }
 
-        public bool IsDuplicate(Task taskToAdd)
+        public bool IsDuplicate(string taskTitle)
         {
             using var db = new TaskContext();
-            var duplicates = db.Tasks.Where(task => task.Title == taskToAdd.Title);
+            var duplicates = db.Tasks.Where(task => task.Title == taskTitle);
             if (duplicates.Count() > 0) return true;
             return false;
         }
