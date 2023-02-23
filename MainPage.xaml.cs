@@ -50,7 +50,7 @@ public partial class MainPage : ContentPage
         titleImage.Source = "tasks.png";
 
         if (animate)
-            await Task.WhenAll(titleImage.FadeIn(400, Easing.Linear), taskView.FadeIn(400, Easing.Linear), clearButton.FadeOut(110, Easing.Linear));
+            await Task.WhenAll(titleImage.FadeIn(400, Easing.Linear), taskView.FadeIn(400, Easing.Linear), clearButton.FadeOut(0, Easing.Linear));
     }
 
     public async void ToCompletedView(bool animate = true)
@@ -63,7 +63,7 @@ public partial class MainPage : ContentPage
 
 
         if (animate)
-            await Task.WhenAll(titleImage.FadeIn(400, Easing.Linear), completedView.FadeIn(400, Easing.Linear), clearButton.FadeIn(0));
+            await Task.WhenAll(titleImage.FadeIn(400, Easing.Linear), completedView.FadeIn(400, Easing.Linear), clearButton.FadeIn(400, Easing.Linear));
     }
 }
 
@@ -79,8 +79,9 @@ public static class VisualElementExtensions
     public static async System.Threading.Tasks.Task FadeIn(this VisualElement element, uint duration = 400, Easing easing = null)
     {
         element.Opacity = 0;
-        await element.FadeTo(1, duration, easing);
         element.IsVisible = true;
+        await element.FadeTo(1, duration, easing);
+
     }
 }
 
