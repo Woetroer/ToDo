@@ -38,8 +38,8 @@
             </Grid.ColumnDefinitions>
             
             <Button x:Name="homeButton" Grid.Column="0" HeightRequest="60" Text="{x:Static models:FASolidIcons.House}" FontFamily="FASolid" TextColor="{StaticResource Primary}" FontSize="24" FontAttributes="Bold" Background="Transparent" Clicked="homeButton_Clicked"/>
-            <Button x:Name="historyButton" Grid.Column="2" HeightRequest="60" Text="{x:Static models:FASolidIcons.CheckDouble}" FontFamily="FASolid" TextColor="{StaticResource Secondary}" FontSize="24" Background="Transparent" Clicked="historyButton_Clicked" Margin="0, 4, 0, 0"/>
-            <Button x:Name="addTaskButton" Grid.Column="1" Text="{x:Static models:FASolidIcons.Pencil}" FontFamily="FASolid" FontSize="28" TextColor="{StaticResource Primary}" HeightRequest="58" WidthRequest="94" Command="{Binding AddTaskCommand}" CornerRadius="28" Margin="10, 0, 10, 0" Clicked="addTaskButton_Clicked">
+            <Button x:Name="completedButton" Grid.Column="2" HeightRequest="60" Text="{x:Static models:FASolidIcons.CheckDouble}" FontFamily="FASolid" TextColor="{StaticResource Secondary}" FontSize="24" Background="Transparent" Clicked="completedButton_Clicked" Margin="0, 4, 0, 0"/>
+            <Button x:Name="addTaskButton" Grid.Column="1" Text="{x:Static models:FASolidIcons.Pencil}" FontFamily="FASolid" FontSize="28" TextColor="{StaticResource Primary}" HeightRequest="58" WidthRequest="94" CornerRadius="28" Margin="10, 0, 10, 0" Clicked="addTaskButton_Clicked">
                 <Button.Shadow>
                     <Shadow Brush="Black"
                     Radius="40"
@@ -97,7 +97,7 @@
                 </Border>
             </Grid>
 
-            <Grid x:Name="historyView" IsVisible="false">
+            <Grid x:Name="completedView" IsVisible="false">
                 <ScrollView>
                     <VerticalStackLayout>
                         <Border StrokeShape="{RoundRectangle CornerRadius=8}" StrokeThickness="0">

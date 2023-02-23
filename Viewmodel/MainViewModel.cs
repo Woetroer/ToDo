@@ -21,7 +21,6 @@ public partial class MainViewModel : ObservableObject
         using var db = new TaskContext();
         Tasks = db.Tasks.Where(task => !task.IsCompleted).ToList();
         CompletedTasks = db.Tasks.Where(task => task.IsCompleted).ToList();
-        taskViewVisible = true;
     }
 
     [ObservableProperty]
@@ -29,15 +28,6 @@ public partial class MainViewModel : ObservableObject
 
     [ObservableProperty]
     List<Task> completedTasks;
-
-    [ObservableProperty]
-    bool taskViewVisible;
-
-    [RelayCommand]
-    void AddTask()
-    {
-        taskViewVisible = true;
-    }
 
     [RelayCommand]
     public void CompleteTask(Task task) => taskService.Complete(task);
@@ -48,8 +38,7 @@ public partial class MainViewModel : ObservableObject
     [RelayCommand]
     public void Clear(bool taskViewVisible)
     {
-        if (taskViewVisible) taskService.DeleteAll();
-        else taskService.DeleteCompleted();
+        taskService.DeleteCompleted();
     }
 
 }

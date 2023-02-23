@@ -11,7 +11,7 @@ public partial class PopupPage
 
     private void addTaskButton_Clicked(object sender, EventArgs e)
     {
-        if (!string.IsNullOrEmpty(taskTitleEntry.Text) && !string.IsNullOrEmpty(descriptionEntry.Text))
+        if (!string.IsNullOrEmpty(taskTitleEntry.Text))
             MopupService.Instance.RemovePageAsync(this);
     }
 }

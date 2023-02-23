@@ -13,23 +13,23 @@ public partial class MainPage : ContentPage
         BindingContext = vm;
     }
 
-    private async void homeButton_Clicked(object sender, EventArgs e)
+    private void homeButton_Clicked(object sender, EventArgs e)
     {
         ToTaskView();
     }
 
-    private async void historyButton_Clicked(object sender, EventArgs e)
+    private void completedButton_Clicked(object sender, EventArgs e)
     {
         ToCompletedView();
     }
 
-    private async void swipedRight_Swiped(object sender, SwipedEventArgs e)
+    private void swipedRight_Swiped(object sender, SwipedEventArgs e)
     {
-        if (historyView.IsVisible)
+        if (completedView.IsVisible)
             ToTaskView();
     }
 
-    private async void swipedLeft_Swiped(object sender, SwipedEventArgs e)
+    private void swipedLeft_Swiped(object sender, SwipedEventArgs e)
     {
         if (taskView.IsVisible)
             ToCompletedView();
@@ -43,28 +43,27 @@ public partial class MainPage : ContentPage
 
     public async void ToTaskView(bool animate = true)
     {
-        ((MainViewModel)(this.BindingContext)).TaskViewVisible = true;
         taskView.IsVisible = true;
-        historyView.IsVisible = false;
-        homeButton.TextColor = Color.FromArgb("#3066BE");
-        historyButton.TextColor = Color.FromArgb("#0090DB");
+        completedView.IsVisible = false;
+        completedButton.TextColor = Color.FromArgb("#696969");
+        homeButton.TextColor = Color.FromArgb("#0090DB");
         titleImage.Source = "tasks.png";
 
         if (animate)
-            await Task.WhenAll(titleImage.FadeIn(400, Easing.Linear), taskView.FadeIn(400, Easing.Linear));
+            await Task.WhenAll(titleImage.FadeIn(400, Easing.Linear), taskView.FadeIn(400, Easing.Linear), clearButton.FadeOut(110, Easing.Linear));
     }
 
     public async void ToCompletedView(bool animate = true)
     {
-        ((MainViewModel)(this.BindingContext)).TaskViewVisible = false;
         taskView.IsVisible = false;
-        historyView.IsVisible = true;
-        historyButton.TextColor = Color.FromArgb("#3066BE");
-        homeButton.TextColor = Color.FromArgb("#0090DB");
+        completedView.IsVisible = true;
+        homeButton.TextColor = Color.FromArgb("#696969");
+        completedButton.TextColor = Color.FromArgb("#0090DB");
         titleImage.Source = "completed.png";
 
+
         if (animate)
-            await Task.WhenAll(titleImage.FadeIn(400, Easing.Linear), historyView.FadeIn(400, Easing.Linear));
+            await Task.WhenAll(titleImage.FadeIn(400, Easing.Linear), completedView.FadeIn(400, Easing.Linear), clearButton.FadeIn(0));
     }
 }
 
