@@ -37,7 +37,9 @@ public partial class MainPage : ContentPage
 
     private void addTaskButton_Clicked(object sender, EventArgs e)
     {
-        ToTaskView();
+        if (!taskView.IsVisible)
+            ToTaskView();
+
         MopupService.Instance.PushAsync(new PopupPage());
     }
 

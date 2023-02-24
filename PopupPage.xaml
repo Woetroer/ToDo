@@ -29,13 +29,14 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="110"/>
+                <RowDefinition Height="3"/>
+                <RowDefinition Height="94"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Border StrokeShape="{RoundRectangle CornerRadius=10}" Grid.Column="1" Grid.Row="0" StrokeThickness="1" Background="White" HeightRequest="47" Padding="0, 5, 0 ,0">
-                <Editor Grid.Column="1" Grid.Row="0" x:Name="taskTitleEntry" TextColor="black" VerticalTextAlignment="Center" BackgroundColor="Transparent" Placeholder="Task Title" PlaceholderColor="{StaticResource Gray500}" WidthRequest="185" Text="{Binding TaskTitle}" MaxLength="22" Margin="0, 0, 0, 2">
+            <Border StrokeShape="{RoundRectangle CornerRadius=10}" Grid.Column="1" Grid.Row="1" StrokeThickness="1" Background="White" HeightRequest="47">
+                <Editor Grid.Column="1" x:Name="taskTitleEntry" TextColor="black" VerticalTextAlignment="Center" BackgroundColor="Transparent" Placeholder="Task Title" PlaceholderColor="{StaticResource Gray500}" WidthRequest="185" Text="{Binding TaskTitle}" MaxLength="22" Margin="0, 0, 0, 2">
                     <Editor.Keyboard>
                         <Keyboard x:FactoryMethod="Create">
                             <x:Arguments>
@@ -46,30 +47,33 @@
                 </Editor>
             </Border>
 
-            <VerticalStackLayout Grid.Row="1" Grid.Column="1" Margin="0, 0, 0, 10">
-                <HorizontalStackLayout Margin="0, 0, 20, 0">
-                    <Label Text="Importance:" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource Gray600}" FontFamily="Calibri" Margin="9, 5, 0, 0"/>
-                    <Border StrokeShape="{RoundRectangle CornerRadius=10}" StrokeThickness="0" Padding="11, 5, 11, 5" Background="{StaticResource Primary}" Margin="10, 0, 0, 0">
-                        <Label Text="{Binding TaskImportance}" FontSize="22" FontAttributes="Bold" TextColor="white"/>
-                    </Border>
-                </HorizontalStackLayout>
-                <sliders:SfSlider
-                  x:Name="importanceSlider"
-                  WidthRequest="210"
-                  Minimum="0"
-                  Maximum="100"
-                  TrackExtent="5"
-                  Value="{Binding TaskImportance}"
-                  Interval="20"
-                  ShowTicks="True"
-                  ShowLabels="True">
-                    <sliders:SfSlider.TrackStyle>
-                        <sliders:SliderTrackStyle ActiveFill="{StaticResource Primary}" InactiveFill="{StaticResource Gray200}"/>
-                    </sliders:SfSlider.TrackStyle>
-                </sliders:SfSlider>
-            </VerticalStackLayout>
+            <Border StrokeShape="{RoundRectangle CornerRadius=10}" StrokeThickness="1" Grid.Row="2" Grid.Column="1" Background="white" Padding="6">
+                <VerticalStackLayout>
+                    <HorizontalStackLayout Margin="12, 12, 20, 0">
+                        <Label Text="Importance:" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource Gray600}" FontFamily="Calibri" Margin="10, 5, 0, 0"/>
+                        <Border StrokeShape="{RoundRectangle CornerRadius=10}" StrokeThickness="0" Padding="11, 5, 11, 5" Background="{StaticResource Primary}" Margin="10, 1, 0, 0">
+                            <Label Text="{Binding TaskImportance}" FontSize="18" FontAttributes="Bold" TextColor="white"/>
+                        </Border>
+                    </HorizontalStackLayout>
+                    <sliders:SfSlider
+                      x:Name="importanceSlider"
+                      WidthRequest="200"
+                      Margin="0, 0, 0, 5"
+                      Minimum="0"
+                      Maximum="100"
+                      TrackExtent="5"
+                      Value="{Binding TaskImportance}"
+                      Interval="20"
+                      ShowTicks="True"
+                      ShowLabels="True">
+                        <sliders:SfSlider.TrackStyle>
+                            <sliders:SliderTrackStyle ActiveFill="{StaticResource Primary}" InactiveFill="{StaticResource Gray200}"/>
+                        </sliders:SfSlider.TrackStyle>
+                    </sliders:SfSlider>
+                </VerticalStackLayout>
+            </Border>
 
-            <Button HeightRequest="48" Margin="0, 5, 0, 0"  Grid.Column="1" Grid.Row="2" FontSize="15" x:Name="addTaskButton" CornerRadius="12" Text="Create" TextColor="{StaticResource Primary}" FontAttributes="Bold" Command="{Binding AddTaskCommand}" Clicked="addTaskButton_Clicked">
+            <Button HeightRequest="48"  Grid.Column="1" Grid.Row="3" FontSize="15" x:Name="addTaskButton" CornerRadius="12" Text="Create" TextColor="{StaticResource Primary}" FontAttributes="Bold" Command="{Binding AddTaskCommand}" Clicked="addTaskButton_Clicked">
                 <Button.Shadow>
                     <Shadow Brush="Black"
                     Radius="14"
