@@ -60,10 +60,10 @@
                       WidthRequest="200"
                       Margin="0, 0, 0, 5"
                       Minimum="0"
-                      Maximum="100"
+                      Maximum="10"
                       TrackExtent="5"
                       Value="{Binding TaskImportance}"
-                      Interval="20"
+                      Interval="1"
                       ShowTicks="True"
                       ShowLabels="True">
                         <sliders:SfSlider.TrackStyle>

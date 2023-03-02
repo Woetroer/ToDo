@@ -29,6 +29,9 @@ public partial class MainViewModel : ObservableObject
     [ObservableProperty]
     List<Task> completedTasks;
 
+    [ObservableProperty]
+    bool isBusy;
+
     [RelayCommand]
     public void CompleteTask(Task task) => taskService.Complete(task);
 
