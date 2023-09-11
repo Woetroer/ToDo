@@ -2,6 +2,7 @@
 No-nonsense easy to use mobile app to keep up with your daily tasks! Available on the playstore.
 
 Homescreen
+<img src="https://github.com/Woetroer/ToDo/assets/92635454/55900e01-15d0-498d-be62-c8f1ff1ee33e" width="250" height="450">
 ![Screenshot_2023-09-11-17-58-28-442-edit_com companyname todo | width = 100px](https://github.com/Woetroer/ToDo/assets/92635454/55900e01-15d0-498d-be62-c8f1ff1ee33e)
 
 Add tasks and define the importance
